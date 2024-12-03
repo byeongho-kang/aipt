@@ -1,12 +1,11 @@
 import os
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
+from langchain_community.document_loaders import TextLoader
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import FAISS
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.document_loaders import TextLoader
-from typing import List
 from pathlib import Path
 
 class RealEstateAgent:
@@ -77,13 +76,46 @@ class RealEstateAgent:
             verbose=True
         )
 
+    def _create_prompt(self, query: str) -> str:
+        """Create a prompt for the chat model"""
+        return f"""당신은 부동산 전문 AI 상담사입니다. 
+주어진 문서들을 기반으로 사용자의 질문에 친절하고 상세하게 답변해주세요.
+
+답변 시 다음 사항을 지켜주세요:
+1. 전문적이고 정확한 정보를 제공하되, 이해하기 쉽게 설명해주세요.
+2. 가능한 한 구체적인 예시나 수치를 포함해서 설명해주세요.
+3. 필요한 경우 장단점이나 여러 관점을 함께 설명해주세요.
+4. 법적/제도적 내용이 포함된 경우 관련 근거를 언급해주세요.
+5. 답변을 적절한 문단으로 구분하여 가독성 있게 작성해주세요.
+
+사용자 질문: {query}
+
+관련 문서 내용:
+{self._get_relevant_context(query)}
+
+위 내용을 바탕으로 답변해주세요."""
+
+    def _get_relevant_context(self, query: str) -> str:
+        """Get relevant context from the knowledge base"""
+        docs = self.chain.retriever.get_relevant_documents(query)
+        return "\n\n".join([doc.page_content for doc in docs])
+
     def get_response(self, question: str) -> str:
         """
         사용자의 질문에 대한 답변을 생성합니다.
         """
         try:
-            response = self.chain({"question": question})
-            return response['answer']
+            prompt = self._create_prompt(question)
+            response = self.chain({"question": prompt})
+            
+            if not response or 'answer' not in response:
+                return "죄송합니다. 답변을 생성하는 데 실패했습니다."
+                
+            return response['answer'].strip()
+            
         except Exception as e:
-            print(f"Error generating response: {e}")
-            return "죄송합니다. 답변을 생성하는 중에 오류가 발생했습니다. 다시 질문해 주시겠습니까?"
+            error_msg = str(e).lower()
+            if 'rate limit' in error_msg:
+                return "죄송합니다. 현재 API 사용량이 한도에 도달했습니다. 잠시 후 다시 시도해주세요. (약 1시간 후)"
+            else:
+                return f"죄송합니다. 답변 생성 중 오류가 발생했습니다: {str(e)}"

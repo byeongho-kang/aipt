@@ -60,27 +60,35 @@ class ChatInterface:
 
     def _handle_user_input(self, prompt: str):
         """Process user input and generate response"""
-        # Add and display user message
-        self._add_message("user", prompt)
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        # Generate and display AI response
-        with st.chat_message("assistant"):
-            response = self.agent.get_response(prompt)
-            st.markdown(response)
-            self._add_message("assistant", response)
+        try:
+            # Add user message
+            self._add_message("user", prompt)
+            
+            # Show spinner while generating response
+            with st.spinner('답변을 생성하고 있습니다...'):
+                response = self.agent.get_response(prompt)
+                
+                if response:
+                    self._add_message("assistant", response)
+                else:
+                    self._add_message("assistant", "죄송합니다. 답변을 생성하는 데 문제가 발생했습니다.")
+            
+            # Display updated chat history
+            st.rerun()
+            
+        except Exception as e:
+            st.error(f"오류가 발생했습니다: {str(e)}")
 
     def run(self):
         """Run the chat interface"""
         st.title(APP_TITLE)
-
-        # Handle user input
-        if prompt := st.chat_input(INPUT_PLACEHOLDER):
-            self._handle_user_input(prompt)
-
+        
         # Display chat history
         self._display_chat_history()
+        
+        # Chat input at the bottom
+        if prompt := st.chat_input(INPUT_PLACEHOLDER):
+            self._handle_user_input(prompt)
 
 def main():
     chat_interface = ChatInterface()
