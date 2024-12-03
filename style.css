@@ -3,34 +3,19 @@
 
 /* 모든 요소에 Pretendard 폰트 적용 */
 * {
-    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
 /* Streamlit 기본 요소들에 대한 폰트 적용 */
-.stMarkdown, 
-.stTextInput > div, 
-.stTextInput > label,
-.stSelectbox,
-.stTextArea,
-.stButton,
-.stHeader,
-.stSubheader,
-.stTitle,
-.stMarkdown p,
-.stSidebar,
-.stException,
-.stWarning,
-.stInfo,
-.stSuccess,
-.stSpinner,
-.stFileUploader,
-.streamlit-expanderHeader,
-.stChatMessage {
-    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+.stTextInput > div > div > input,
+.stSelectbox > div > div > select,
+.stTextArea > div > div > textarea {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 /* 채팅 메시지 스타일링 */
 .stChatMessage {
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     padding: 1rem;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
@@ -56,6 +41,8 @@
     border-radius: 0.25rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 500;
 }
 
 .stButton>button:hover {
@@ -78,6 +65,8 @@
 h1, h2, h3, h4, h5, h6 {
     color: #2E4053;
     margin-bottom: 2rem;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-weight: 600;
 }
 
 /* 입력 필드 스타일링 */
@@ -95,6 +84,7 @@ h1, h2, h3, h4, h5, h6 {
 /* 채팅 입력 필드 스타일링 */
 .stChatInputContainer {
     margin-top: 1rem;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 /* 텍스트 영역 스타일링 */
