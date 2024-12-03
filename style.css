@@ -1,0 +1,106 @@
+/* Pretendard 웹폰트 적용 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css");
+
+/* 모든 요소에 Pretendard 폰트 적용 */
+* {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+}
+
+/* Streamlit 기본 요소들에 대한 폰트 적용 */
+.stMarkdown, 
+.stTextInput > div, 
+.stTextInput > label,
+.stSelectbox,
+.stTextArea,
+.stButton,
+.stHeader,
+.stSubheader,
+.stTitle,
+.stMarkdown p,
+.stSidebar,
+.stException,
+.stWarning,
+.stInfo,
+.stSuccess,
+.stSpinner,
+.stFileUploader,
+.streamlit-expanderHeader,
+.stChatMessage {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif !important;
+}
+
+/* 채팅 메시지 스타일링 */
+.stChatMessage {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    max-width: 800px;
+}
+
+.stChatMessage div {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* 파일 업로더 스타일링 */
+.stFileUploader {
+    margin: 2rem 0;
+}
+
+/* 버튼 스타일링 */
+.stButton>button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.stButton>button:hover {
+    background-color: #45a049;
+}
+
+/* 스피너 스타일링 */
+.stSpinner {
+    margin: 1rem 0;
+}
+
+/* 에러 메시지 스타일링 */
+.stAlert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+}
+
+/* 타이틀 스타일링 */
+h1, h2, h3, h4, h5, h6 {
+    color: #2E4053;
+    margin-bottom: 2rem;
+}
+
+/* 입력 필드 스타일링 */
+.stTextInput>div>div>input {
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+/* 사이드바 스타일링 */
+.stSidebar .stSelectbox {
+    margin-bottom: 1rem;
+}
+
+/* 채팅 입력 필드 스타일링 */
+.stChatInputContainer {
+    margin-top: 1rem;
+}
+
+/* 텍스트 영역 스타일링 */
+.stTextArea>div>div>textarea {
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif !important;
+}
